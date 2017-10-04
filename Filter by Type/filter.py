@@ -1,18 +1,20 @@
-def filter(int, str, list):
-    if int >= 100:
-        print "That's a big number!"
-    elif int < 100:
-        print "That's a small number"
-
-    if len(str) >= 50:
-        print "Long sentence."
-    elif len(str) < 50:
-        print "Short sentence."
-
-    if len(list) >= 10:
-        print "Big list!"
-    elif len(list) < 10:
-        print "Short List."
+#function to test type
+def filter(test):
+    if type(test) is int:
+        if test >= 100:
+            print "That's a big number!"
+        else:
+            print "That's a small number"
+    elif type(test) is str:
+        if len(test) >= 50:
+            print "Long sentence."
+        else:
+            print "Short sentence."
+    elif isinstance(test, list):
+        if len(test) >= 10:
+            print "Big list!"
+        else:
+            print "Short List."
     pass
 
 sI = 45
@@ -30,8 +32,4 @@ lL = [4,34,22,68,9,13,3,5,7,9,2,12,45,923]
 eL = []
 spL = ['name','address','phone number','social security number']
 
-filter(sI, sS, aL)
-filter(mI, mS, mL)
-filter(bI, bS, lL)
-filter(eI, eS, eL)
-filter(spI, sS, spL)
+filter(lL)
