@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Home</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-4.0.0-beta/dist/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-4.0.0-beta/docs/4.0/examples/cover/cover.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+        <script type="text/javascript" src="{{ url_for('static', filename='bootstrap-4.0.0-beta/assets/js/vendor/popper.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='bootstrap-4.0.0-beta/dist/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    </head>
+    <body>
+        <div class="site-wrapper home">
+
+            <div class="site-wrapper-inner">
+
+                <div class="cover-container">
+
+                    <div class="masthead clearfix">
+                        <div class="inner">
+                            <img class="masthead-brand brand" src="{{ url_for('static', filename='images/DOJOkanji200.png') }}">
+                            <nav class="nav nav-masthead">
+                                <a class="nav-link active" href="http://localhost:5000/">Home</a>
+                                <a class="nav-link" href="http://localhost:5000/ninjas">Ninjas</a>
+                                <a class="nav-link" href="http://localhost:5000/dojos/new">Dojos</a>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="inner cover">
+                        <h1 class="cover-heading">Welcome Future Coding Ninja.</h1>
+                        <p class="lead">Here you will learn the necessaries skills to survive in the coding field.  You will have to work hard to earn your black belt and become a coding ninja.</p>
+                        <p class="lead">
+                        <a href="http://www.codingdojo.com" class="btn btn-lg btn-secondary">Learn more</a>
+                        </p>
+                    </div>
+
+                    <div class="mastfoot">
+                        <div class="inner">
+                            <p>Landing Page for <a href="http://www.codingdojo.com"> Coding Dojo</a>, by <a href="https://linkedin.com/in/rgero215/">RGero215</a>.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </body>
+</html>
