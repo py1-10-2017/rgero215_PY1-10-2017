@@ -1,0 +1,25 @@
+html {
+  font-size: 18px;
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 24px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 32px;
+  }
+}
+
+.submit, .back {
+    float: right;
+}
