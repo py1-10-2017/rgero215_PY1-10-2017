@@ -1,0 +1,9 @@
+h1, .buttons, input, h4 {
+    text-align: center;
+}
+.ninja, .hacker {
+    margin-top: 30px;
+}
+form {
+    display: inline-block;
+}

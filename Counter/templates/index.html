@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Counter</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-4.0.0-beta/dist/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-4.0.0-beta/docs/4.0/examples/starter-template/starter-template.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+        <script type="text/javascript" src="{{ url_for('static', filename='bootstrap-4.0.0-beta/assets/js/vendor/popper.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='bootstrap-4.0.0-beta/dist/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Counter</h1>
+                <h4>{{session['counter']}}</h4>
+                <div class="buttons">
+                    <form  action="/" method="post">
+                        <input class="btn btn-dark ninja" type="submit" name="ninja" value="Ninja">
+                    </form>
+                    <form action="/reset" method="post">
+                        <input class="btn btn-danger hacker" type="submit" name="hacker" value="Hacker">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
