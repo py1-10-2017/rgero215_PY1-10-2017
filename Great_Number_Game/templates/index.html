@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Great Number Game</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-4.0.0-beta/dist/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-4.0.0-beta/docs/4.0/examples/starter-template/starter-template.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+        <script type="text/javascript" src="{{ url_for('static', filename='bootstrap-4.0.0-beta/assets/js/vendor/popper.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='bootstrap-4.0.0-beta/dist/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Welcome to the Great Number Game!</h1>
+                <h3>I'm thinking of a number between 1 and 100</h3>
+                <h3>Take a Guess</h3>
+                <div class="redBox">
+
+                    <h1 class="tooLow">Too Low!</h1>
+
+                    <h1 class="tooHigh">Too High!</h1>
+
+                    <h1 class="notNumber">Enter a number between 1-100!</h1>
+
+                </div>
+                <div class="greenBox">
+                    <form name="winner" class="winner" action="/" method="post">
+                        <h1 class="winner">{{session['winner']}} Was the <b>number!</b></h1>
+                        <input class="play" type="submit" name="play" value="Play again!">
+                    </form>
+                </div>
+                <div class="guessNumber">
+                    <form name="guess" action="/" method="post">
+                        <input class="pick" type="hidden" name="" value="{{session['winner']}}">
+                        <input class="guess" type="text" name="guess" value=""><br>
+                        <input class="btn btn-primary submit" type="submit" name="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
