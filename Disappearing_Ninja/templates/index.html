@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Disappearing Ninja</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-4.0.0-beta/dist/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-4.0.0-beta/docs/4.0/examples/starter-template/starter-template.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='css/bootstrap-4.0.0-beta/assets/js/vendor/popper.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='css/bootstrap-4.0.0-beta/dist/js/bootstrap.min.js') }}"></script>
+        <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script> -->
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+
+                    {% if not 'ninja' in rule.rule %}
+                    <form class="" action="/" method="post">
+                        <h1>No ninjas here</h1>
+                    </form>
+                    {% elif 'ninja' in rule.rule and not color %}
+                    <form class="ninja" action="/ninja" method="post">
+                        <img src="{{url_for('static', filename='Ninjas/tmnt.png')}}" alt="Ninja Turtles">
+                    </form>
+                    {% elif color == 'blue' %}
+                    <form class="ninja" action="/ninja/{{color}}" method="post">
+                        <img src="{{url_for('static', filename='Ninjas/leonardo.jpg')}}" alt="Leonardo">
+                    </form>
+                    {% elif color == 'purple' %}
+                    <form class="ninja" action="/ninja/{{color}}" method="post">
+                        <img src="{{url_for('static', filename='Ninjas/donatello.jpg')}}" alt="Donatello">
+                    </form>
+                    {% elif color == 'red' %}
+                    <form class="ninja" action="/ninja/{{color}}" method="post">
+                        <img src="{{url_for('static', filename='Ninjas/raphael.jpg')}}" alt="Raphael">
+                    </form>
+                    {% elif color == 'orange' %}
+                    <form class="ninja" action="/ninja/{{color}}" method="post">
+                        <img src="{{url_for('static', filename='Ninjas/michelangelo.jpg')}}" alt="Michelangelo">
+                    </form>
+                    {% else %}
+                    <form class="ninja" action="/ninja/{{color}}" method="post">
+                        <img src="{{url_for('static', filename='Ninjas/notapril.jpg')}}" alt="Megan Fox">
+                    </form>
+                    {% endif %}
+            </div>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,10 @@
+body, .container {
+    background: rgb(33, 37, 43);
+}
+.jumbotron {
+    background: rgb(42, 44, 52);
+    text-align: center;
+}
+h1 {
+    color: rgb(171, 178, 191);
+}
