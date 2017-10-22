@@ -1,0 +1,20 @@
+On terminal I run mysql using this command $brew services start mysql
+then open MySQL Workbench settings to check the hostname, port and user name.
+To change the port I create a file named my.cnf and add the following text:
+
+[client]
+port = 3307
+[mysqld]
+port = 3307
+
+And save the file in this dir: /etc/my.cnf and restart the server:
+$ brew services restart mysql
+
+To import a file to MySQL Workbench I just open the file and copy, paste and run the file on the editor.
+To use a specific database within the editor we run the following command:
+USE [database name] 
+USE twitter
+SELECT first_name, last_name, tweets.tweet
+FROM users
+LEFT JOIN tweets
+ON users.id = tweets.user_id;
