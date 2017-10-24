@@ -1,0 +1,63 @@
+// 1.
+
+sqlalchemy.exc.OperationalError: (_mysql_exceptions.OperationalError) (1045, "Access 
+denied for user 'rgero215'@'localhost' (using password: YES)")
+
+fix: change user: rgero215 to user: root in config 
+
+config = {
+    'host': 'localhost',
+    'database': db, # we got db as an argument
+    'user': 'root',
+    'password': 'root',
+    'port': '3306' # change the port to match the port your SQL server is running on
+}
+
+// 2.
+
+sqlalchemy.exc.OperationalError: (_mysql_exceptions.OperationalError) (2003, "Can't connect to MySQL server on '127.0.0.1' (61)")
+
+fix: make sure your port match with SQL.  change port: 3307 to port: 3306 in config 
+
+config = {
+    'host': 'localhost',
+    'database': db, # we got db as an argument
+    'user': 'root',
+    'password': 'root',
+    'port': '3306' # change the port to match the port your SQL server is running on
+}
+
+// 3. 
+
+sqlalchemy.exc.OperationalError: (_mysql_exceptions.OperationalError) (2003, "Can't connect to MySQL server on '123.0.0.1' (51)")
+
+fix: Change MySQL server to ’127.0.0.1’ 
+
+DATABASE_URI = "mysql://{}:{}@127.0.0.1:{}/{}".format(config['user'], config['password'], config['port'], config['database'])
+
+// 4.
+
+sqlalchemy.exc.OperationalError: (_mysql_exceptions.OperationalError) (1046, 'No database selected') [SQL: u'SELECT * FROM users']
+
+fix: missing database
+
+DATABASE_URI = "mysql://{}:{}@127.0.0.1:{}/{}".format(config['user'], config['password'], config['port'], config['database'])
+
+// 5.
+
+
+Traceback (most recent call last):
+  File "server.py", line 8, in <module>
+    print mysql.query_db("SELECT * FROM users")
+  File "/Users/RGero13/Desktop/rgero215_PY1-10-2017/DB_Connection/flask_mysql/mysqlconnection.py", line 22, in query_db
+    result = self.db.session.execute(text(query), data)
+AttributeError: 'MySQLConnection' object has no attribute 'db'
+
+fix: missing self.
+
+# this will use the above values to generate the path to connect to your sql database
+        DATABASE_URI = "mysql://{}:{}@127.0.0.1:{}/{}".format(config['user'], config['password'], config['port'], config['database'])
+        app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
+        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+        # establish the connection to database
+        self.db = SQLAlchemy(app)

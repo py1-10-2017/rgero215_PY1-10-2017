@@ -1,0 +1,25 @@
+body, .container {
+    background: rgb(33, 37, 43);
+}
+.jumbotron {
+    background: rgb(42, 44, 52);
+}
+label {
+    color: rgb(171, 178, 191);
+}
+.activities {
+    color: rgb(171, 178, 191);
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+.scroll {
+    background: rgb(42, 44, 52);
+    height: 200px;
+    overflow-y: scroll
+}
+.email, .created {
+    display: inline-block;
+}
+.created {
+    float: right;
+}

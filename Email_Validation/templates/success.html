@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Success</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-4.0.0-beta/dist/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-4.0.0-beta/docs/4.0/examples/starter-template/starter-template.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='css/bootstrap-4.0.0-beta/assets/js/vendor/popper.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='css/bootstrap-4.0.0-beta/dist/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                      {% for category, message in messages %}
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                        </div>
+                      {% endfor %}
+                    {% endif %}
+                  {% endwith %}
+            </div>
+            <form class="activities" action="/" method="post">
+                <label for="activities">Email Addresses Entered:</label>
+                <div class="scroll" data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+                    {% for email in activity: %}
+                         <p class="email">{{ email['email']}}</p> <p class="created">{{email['created']}}</p>
+                         <hr>
+                      {% endfor %}
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
