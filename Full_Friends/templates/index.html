@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Full Friends</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-4.0.0-beta/dist/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-4.0.0-beta/docs/4.0/examples/starter-template/starter-template.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='css/bootstrap-4.0.0-beta/assets/js/vendor/popper.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='css/bootstrap-4.0.0-beta/dist/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                {% if error == True %}
+                  {% with messages = get_flashed_messages(with_categories=true) %}
+                      {% if messages %}
+                        {% for category, message in messages %}
+                          <div class="alert alert-danger alert-dismissible" role="alert">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          {{ message }}
+                          </div>
+                        {% endfor %}
+                      {% endif %}
+                    {% endwith %}
+                    {% else %}
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                          {% for category, message in messages %}
+                            <div class="alert alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ message }}
+                            </div>
+                          {% endfor %}
+                        {% endif %}
+                      {% endwith %}
+                {%endif%}
+
+                <h1>Full Friends!</h1>
+                <!-- with all the data we can then construct a more structured output -->
+
+
+                    <table class="table table-striped table-inverse table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">First Name</th>
+                          <th scope="col">Last Name</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Actions</th>
+                        </tr>
+                      </thead>
+
+                          <tbody>
+                            {% for friend in all_friends: %}
+                                <tr>
+                                  <td>{{ friend['first_name'] }}</td>
+                                  <td>{{ friend['last_name'] }}</td>
+                                  <td>{{ friend['email'] }}</td>
+                                  <td class="actions">
+                                      <form action='/friends/{{ friend['id'] }}/edit' method='POST'>
+                                          <input formaction="/friends/{{ friend['id'] }}/edit" class="btn btn-outline-light" type="submit" name = "edit" value="Edit">
+                                      </from>
+                                      <form action='/friends/{{ friend['id'] }}/delete' method='POST'>
+                                          <input formaction="/friends/{{ friend['id'] }}/delete" class="btn btn-outline-danger" type="submit" name="delete" value="Delete">
+                                      </form>
+                                  </td>
+                                </tr>
+                            {% endfor %}
+                          </tbody>
+
+                  </table>
+
+                <form action='/friends' method='POST'>
+                    <div class="form-group row">
+                        <label for="first_name">First Name:</label>
+                        <input class="form-control col-sm-4" type="text" name="first_name" id="first_name">
+                    </div>
+                    <div class="form-group row">
+                        <label for="last_name">Last Name:</label>
+                        <input class="form-control col-sm-4" type="text" name="last_name" id="last_name">
+                    </div>
+                    <div class="form-group row">
+                        <label class="text-center" for="occupation">Email:</label>
+                        <input class="form-control col-sm-4" type="email" name="email" id="email">
+                        <input class="btn btn-outline-dark" type="submit" value="Add Friend">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </body>
+</html>
