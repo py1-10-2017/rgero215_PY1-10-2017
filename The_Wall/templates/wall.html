@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CodingDojo Wall &amp; Registers</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="{{url_for('static', filename='bootstrap/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='font-awesome/css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/form-elements.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+        <link rel="stylesheet" type="text/css" href="static/font-awesome/css/font-awesome.min.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="{{url_for('static', filename='ico/favicon.png')}}">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{url_for('static', filename='ico/apple-touch-icon-144-precomposed.png')}}">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{url_for('static', filename='ico/apple-touch-icon-114-precomposed.png')}}">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{url_for('static', filename='ico/apple-touch-icon-72-precomposed.png')}}">
+        <link rel="apple-touch-icon-precomposed" href="{{url_for('static', filename='ico/apple-touch-icon-57-precomposed.png')}}">
+
+    </head>
+
+    <body>
+        <div class="clearfix">
+            <nav class="navbar navbar-default">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#">
+                    <img class="brand" alt="Brand" src="static/img/brand.png" width="45px" height="45px">
+                  </a>
+                  <a class="navbar-brand dojo" href="#">CodingDojo Wall</a>
+                </div>
+                <ul class="nav nav-pills pull-right navbar-right">
+                    <li role="presentation"><p class="navbar-text">Signed in as <a href="#" class="navbar-link">{{session['first_name']}}</a></p></li>
+                    <li role="presentation"><a href="/logout" class="btn btn-info btn-lg active">Log off</a></li>
+                </ul>
+              </div>
+            </nav>
+        </div>
+
+        <!-- Top content -->
+        <div class="top-content">
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                              {% if messages %}
+                                {% for category, message in messages %}
+                                  <div class="alert alert-info alert-dismissible" role="alert">
+                                  <button type="button" class="close fade" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  {{ message }}
+                                  </div>
+                                {% endfor %}
+                              {% endif %}
+                            {% endwith %}
+                        <div class="col-sm-12 message clearfix">
+                            <form class="" action="/message" method="post">
+                                <div class="form-group">
+		                        	<h3 class="message">Post a message</h3>
+		                        	<textarea name="message" class="form-about-yourself form-control" id="form-about-yourself"></textarea>
+		                        </div>
+		                        <button type="submit" class="btn pull-right">Post a message</button>
+                            </form>
+                        </div>
+                        {% for message in messages_obj %}
+                            <div class="col-sm-12 clearfix">
+                                <h4 class="message">{{message['posted_by']}}</h4>
+                                <div class="col-sm-11 pull-right">
+                                    <p class="message">{{message['message']}}</p>
+                                    {% for comment in message['comments'] %}
+                                        {% if message['comments']|length > 0 %}
+                                           <div class="col-sm-12 pull-right">
+                                               <h4 class="message">{{comment['posted_by']}}</h4>
+                                               <p class="message">{{comment['comment']}}</p>
+                                           </div>
+                                           {% endif %}
+                                    {% endfor %}
+                                    <div class="col-sm-12 pull-right">
+                                        <form class="" action='/comment' method="post">
+                                            <div class="form-group">
+                                                <h4 class="message">Post a comment</h4>
+                                                <textarea name="comment" class="form-about-yourself form-control comment" id="form-about-yourself"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-success pull-right">Post a comment</button>
+                                            <input type="hidden" name="message_id" value="{{message.id}}">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer>
+        	<div class="container">
+        		<div class="row">
+
+        			<div class="col-sm-8 col-sm-offset-2">
+        				<div class="footer-border"></div>
+        				<p>Made by Ramon Geronimo at <a href="http://linkedin.com/in/rgero215" target="_blank"><strong>RGERO215</strong></a></p>
+        			</div>
+
+        		</div>
+        	</div>
+        </footer>
+
+        <!-- Javascript -->
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+
+    </body>
+
+</html>
