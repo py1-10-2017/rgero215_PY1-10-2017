@@ -9,7 +9,7 @@ class Bike(object):
     def displayInfo(self):
         print '''Price: ${}
 Max_speed: {}
-Total miles: {}mph
+Total miles: {} miles
 ======================================='''.format(self.price, self.max_speed, self.miles)
         return self
 
