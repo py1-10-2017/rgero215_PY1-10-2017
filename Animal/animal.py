@@ -23,7 +23,8 @@ animal1 = Animal('Cat').walk(3).run(2).display_health()
 
 class Dog(Animal):
     """docstring for Dog."""
-    def __init__(self, health):
+    def __init__(self, name):
+        super(Dog, self).__init__(name)
         self.health = 150
 
 
@@ -36,7 +37,8 @@ dog1 = Dog('Coco').walk(3).run(2).pet(1).display_health()
 
 class Dragon(Animal):
     """docstring for Dragon."""
-    def __init__(self, health):
+    def __init__(self, name):
+        super(Dragon, self).__init__(name)
         self.health = 170
 
 

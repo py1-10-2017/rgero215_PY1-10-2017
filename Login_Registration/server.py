@@ -10,9 +10,7 @@ mysql = MySQLConnector(app,'login_registration')
 app.secret_key = 'session'
 @app.route('/')
 def index():
-    query = "SELECT * FROM users"
-    users = mysql.query_db(query)
-    return render_template('index.html', all_users=users)
+    return render_template('index.html')
 @app.route('/register', methods=['POST'])
 def create():
     query = "SELECT * FROM users"
