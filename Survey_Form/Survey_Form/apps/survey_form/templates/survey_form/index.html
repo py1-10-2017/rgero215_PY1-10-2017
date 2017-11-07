@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Survey Form</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'survey_form/css/bootstrap-4.0.0-beta/dist/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'survey_form/css/bootstrap-4.0.0-beta/docs/4.0/examples/starter-template/starter-template.css'%}">
+        <link rel="stylesheet" href="{% static 'survey_form/css/style.css'%}">
+        <script type="text/javascript" src="{% static 'survey_form/js/jquery-3.2.1.js'%}"></script>
+        <script type="text/javascript" src="{% static 'survey_form/css/bootstrap-4.0.0-beta/assets/js/vendor/popper.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'survey_form/css/bootstrap-4.0.0-beta/dist/js/bootstrap.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'survey_form/js/script.js'%}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <form action="/surveys/process" method="post">
+                      {% csrf_token %}
+                      <div class="form-group row">
+                        <label for="exampleFormControlInput1" class="col-sm-3 col-form-label">Your Name:</label>
+                        <div class="col-sm-9">
+                            <input type="name" class="form-control name" id="exampleFormControlInput1" name="name">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleFormControlSelect1" class="col-sm-3 col-form-label">Dojo Location:</label>
+                        <div class="col-sm-9">
+                            <select class="form-control select" id="exampleFormControlSelect1" name="location">
+                              <option>Seattle</option>
+                              <option>Los Angeles</option>
+                              <option>Silicon Valey</option>
+                              <option>Washington DC</option>
+                              <option>Dallas</option>
+                              <option>Chicago</option>
+                              <option>Tulsa</option>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleFormControlSelect1" class="col-sm-3 col-form-label">Favorite Language:</label>
+                        <div class="col-sm-9">
+                            <select class="form-control select" id="exampleFormControlSelect1" name="language">
+                              <option>.NET/C#</option>
+                              <option>Ruby on Rails</option>
+                              <option>Python</option>
+                              <option>MEAN</option>
+                              <option>Java</option>
+                              <option>iOS Swift</option>
+                              <option>JavaScript</option>
+                              <option>HTML</option>
+                              <option>CSS</option>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Commnet (optional):</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" name="comment"></textarea>
+                      </div>
+                      <input class="btn btn-primary submit" type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

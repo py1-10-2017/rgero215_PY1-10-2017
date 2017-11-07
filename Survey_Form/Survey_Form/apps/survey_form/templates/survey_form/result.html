@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Result</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'survey_form/css/bootstrap-4.0.0-beta/dist/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'survey_form/css/bootstrap-4.0.0-beta/docs/4.0/examples/starter-template/starter-template.css'%}">
+        <link rel="stylesheet" href="{% static 'survey_form/css/style.css'%}">
+        <script type="text/javascript" src="{% static 'survey_form/js/jquery-3.2.1.js'%}"></script>
+        <script type="text/javascript" src="{% static 'survey_form/css/bootstrap-4.0.0-beta/assets/js/vendor/popper.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'survey_form/css/bootstrap-4.0.0-beta/dist/js/bootstrap.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'survey_form/js/script.js'%}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Thanks for submitting this form!</strong>  You have submitted this form {{request.session.count}} times now.
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="jumbotron">
+                <h1>Submitted Info</h1>
+                <form action="/back" method="get">
+                      <div class="form-group row">
+                        <label for="staticName" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                          <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{request.session.name}}">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="staticName" class="col-sm-2 col-form-label">Dojo Location</label>
+                        <div class="col-sm-10">
+                          <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{request.session.location}}">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="staticName" class="col-sm-2 col-form-label">Language</label>
+                        <div class="col-sm-10">
+                          <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{request.session.language}}">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="staticName" class="col-sm-2 col-form-label">Comment</label>
+                        <div class="col-sm-10">
+                          <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{request.session.comment}}">
+                        </div>
+                      </div>
+                      <input class="btn btn-primary back" type="submit" value="Go Back">
+                </form>
+
+            </div>
+        </div>
+    </body>
+</html>
