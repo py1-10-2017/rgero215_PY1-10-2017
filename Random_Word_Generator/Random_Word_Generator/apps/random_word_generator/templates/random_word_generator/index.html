@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Random Word Generator</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'random_word_generator/css/bootstrap-4.0.0-beta/dist/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'random_word_generator/css/bootstrap-4.0.0-beta/docs/4.0/examples/starter-template/starter-template.css'%}">
+        <link rel="stylesheet" href="{% static 'random_word_generator/css/style.css'%}">
+        <script type="text/javascript" src="{% static 'random_word_generator/js/jquery-3.2.1.js'%}"></script>
+        <script type="text/javascript" src="{% static 'random_word_generator/css/bootstrap-4.0.0-beta/assets/js/vendor/popper.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'random_word_generator/css/bootstrap-4.0.0-beta/dist/js/bootstrap.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'random_word_generator/js/script.js'%}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="title">
+                <h1>Random Word (attempt #{{request.session.count}})</h1>
+            </div>
+            <div class="jumbotron">
+                <form action="/random_word" method="post">
+                    {% csrf_token %}
+                    <div class="box">
+                        <h1 class="word">{{request.session.random_word}}</h1>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Generate">
+                    <input formaction="random_word/reset" class="btn btn-danger" type="submit" value="Reset">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
