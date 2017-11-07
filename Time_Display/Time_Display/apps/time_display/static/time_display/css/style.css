@@ -1,0 +1,12 @@
+.container {
+    text-align: center;
+}
+.title {
+    border: solid black 1px;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+.datetime {
+    font-size: 72px;
+}
