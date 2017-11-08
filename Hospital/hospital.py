@@ -20,7 +20,7 @@ class Hospital(object):
     def __init__(self):
         self.patient = []
         self.name = 'Memorial Hospital'
-        self.capacity = 2
+        self.capacity = 100
         self.beds = self.initialize_beds()
 
     def initialize_beds(self):
@@ -51,7 +51,6 @@ class Hospital(object):
                 for bed in self.beds:
                     if bed['bed_id'] == patient.bed_number:
                         bed['Available'] = True
-                        print 'This is True'
                         break
                 self.patient.remove(patient)
                 patient.time = datetime.now().strftime('%A, %d. %B %Y %I:%M%p')

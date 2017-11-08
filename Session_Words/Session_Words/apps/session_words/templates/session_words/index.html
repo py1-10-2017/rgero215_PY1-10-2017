@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Session Words</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'session_words/css/bootstrap-4.0.0-beta/dist/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'session_words/css/bootstrap-4.0.0-beta/docs/4.0/examples/starter-template/starter-template.css'%}">
+        <link rel="stylesheet" href="{% static 'session_words/css/style.css'%}">
+        <script type="text/javascript" src="{% static 'session_words/js/jquery-3.2.1.js'%}"></script>
+        <script type="text/javascript" src="{% static 'session_words/css/bootstrap-4.0.0-beta/assets/js/vendor/popper.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'session_words/css/bootstrap-4.0.0-beta/dist/js/bootstrap.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'session_words/js/script.js'%}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <div class="col-sm-6 divisor">
+                    <form action="/process/success" method="post">
+                          {% csrf_token %}
+                          <div class="form-group col-sm-12 row">
+                            <h1>Add a new word</h1>
+                            <div class="col-sm-12">
+                                <input type="name" class="form-control word" id="exampleFormControlInput1" name="word">
+                            </div>
+                          </div>
+                          <div class="form-group col-sm-6 row">
+                            <h3>Choose a color</h3><br>
+                            <div class="col-sm-9">
+                                <label class="custom-control custom-radio">
+                                    <input id="radio1" name="color" type="radio" class="custom-control-input" value="red">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Red</span>
+                                </label><br>
+                                <label class="custom-control custom-radio">
+                                    <input id="radio2" name="color" type="radio" class="custom-control-input" value="green">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Green</span>
+                                </label><br>
+                                <label class="custom-control custom-radio">
+                                    <input id="radio3" name="color" type="radio" class="custom-control-input" value="blue">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Blue</span>
+                                </label>
+                            </div>
+                          </div>
+                          <div class="form-group col-sm-12 row">
+                            <div class="col-sm-9 checkBox">
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="show-big" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">show in BIG fonts!</span>
+                                </label>
+                            </div>
+                          </div>
+                          <input class="btn btn-primary submit" type="submit" value="Add to Session">
+                    </form>
+                </div>
+                <div class="col-sm-6 clear-session">
+                    <form action="/process/reset" method="post">
+                        {% csrf_token %}
+                        <input class="btn btn-danger submit" type="submit" value="Clear Session">
+                        <div class="form-group col-sm-12 row scroll">
+                            {% if request.session.words %}
+                                {% for word in request.session.words %}
+                                <p> <span style="color:{{word.color}}" class="{{word.big}}">{{word.word}}</span> - added on {{word.created_at}}</p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

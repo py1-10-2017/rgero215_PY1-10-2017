@@ -1,0 +1,45 @@
+ html {
+ font-size: 18px;
+}
+
+@include media-breakpoint-up(sm) {
+ html {
+   font-size: 20px;
+ }
+}
+
+@include media-breakpoint-up(md) {
+ html {
+   font-size: 24px;
+ }
+}
+
+@include media-breakpoint-up(lg) {
+ html {
+   font-size: 32px;
+ }
+}
+.divisor {
+   border-right: solid black 3px;
+   display: inline-block;
+}
+
+.checkBox {
+   margin-left: -20px;
+}
+.clear-session {
+   display: inline-block;
+   vertical-align: top;
+   margin-left: -6px;
+}
+.clear-session input.btn {
+   float: right;
+   margin-bottom: 20px;
+}
+.big{
+    font-size: 1.2em;
+}
+.scroll{
+    height: 300px;
+    overflow-y: scroll
+}
