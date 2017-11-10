@@ -1,0 +1,23 @@
+input {
+    margin-left: 20px;
+
+}
+label {
+    margin-left: 15px;
+}
+.btn {
+    margin-left: 10px;
+    display: inline;
+}
+/*h1 {
+    text-align: center;
+}*/
+.actions {
+    width: 300px;
+}
+.form-group {
+    display: inline-block;
+}
+label {
+    margin-left: -8px;
+}
