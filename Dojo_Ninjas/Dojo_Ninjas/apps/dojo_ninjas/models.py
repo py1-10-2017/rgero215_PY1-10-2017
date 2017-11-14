@@ -10,7 +10,7 @@ class Dojo(models.Model):
     state = models.CharField(max_length=2)
     desc = models.TextField()
     def __repr__(self):
-        return "<Blog object: {} {} {}>".format(self.name, self.city, self.state)
+        return "<Dojo object: {} {} {}>".format(self.name, self.city, self.state)
 
 class Ninja(models.Model):
     """docstring for Ninjas."""
@@ -18,4 +18,4 @@ class Ninja(models.Model):
     last_name = models.CharField(max_length=255)
     dojo = models.ForeignKey(Dojo, related_name = 'ninjas')
     def __repr__(self):
-        return "<Blog object: {} {}>".format(self.first_name, self.last_name)
+        return "<Ninja object: {} {}>".format(self.first_name, self.last_name)
