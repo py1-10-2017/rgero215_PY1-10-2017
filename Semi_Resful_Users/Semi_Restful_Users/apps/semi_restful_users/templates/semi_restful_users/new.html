@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Add A New User</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'semi_restful_users/css/bootstrap-4.0.0-beta/dist/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'semi_restful_users/css/bootstrap-4.0.0-beta/docs/4.0/examples/starter-template/starter-template.css'%}">
+        <link rel="stylesheet" href="{% static 'semi_restful_users/css/style.css'%}">
+        <script type="text/javascript" src="{% static 'semi_restful_users/js/jquery-3.2.1.js'%}"></script>
+        <script type="text/javascript" src="{% static 'semi_restful_users/css/bootstrap-4.0.0-beta/assets/js/vendor/popper.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'semi_restful_users/css/bootstrap-4.0.0-beta/dist/js/bootstrap.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'semi_restful_users/js/script.js'%}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Add a New User</h1>
+                <form action='/users' method='POST'>
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label for="first_name">First Name:</label>
+                        <input class="form-control col-sm-8" type="text" name="first_name" id="first_name">
+                    </div>
+                    <div class="form-group row">
+                        <label for="last_name">Last Name:</label>
+                        <input class="form-control col-sm-8" type="text" name="last_name" id="last_name">
+                    </div>
+                    <div class="form-group row">
+                        <label for="email">Email:</label>
+                        <input class="form-control col-sm-8" type="email" name="email" id="email">
+                        <input class="btn btn-outline-dark button" type="submit" value="Create">
+                    </div>
+                </form>
+                <h3><a href="/users">Go Back</a></h3>
+            </div>
+        </div>
+    </body>
+</html>

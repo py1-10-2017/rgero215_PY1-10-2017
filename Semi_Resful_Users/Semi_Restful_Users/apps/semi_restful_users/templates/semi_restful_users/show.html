@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>User</title>
+        <title>Users</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'semi_restful_users/css/bootstrap-4.0.0-beta/dist/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'semi_restful_users/css/bootstrap-4.0.0-beta/docs/4.0/examples/starter-template/starter-template.css'%}">
+        <link rel="stylesheet" href="{% static 'semi_restful_users/css/style.css'%}">
+        <script type="text/javascript" src="{% static 'semi_restful_users/js/jquery-3.2.1.js'%}"></script>
+        <script type="text/javascript" src="{% static 'semi_restful_users/css/bootstrap-4.0.0-beta/assets/js/vendor/popper.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'semi_restful_users/css/bootstrap-4.0.0-beta/dist/js/bootstrap.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'semi_restful_users/js/script.js'%}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron profile">
+                <h1>User {{ user.id }}</h1>
+                <form action="" method="get">
+                    {% csrf_token %}
+                    <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" src="{% static 'semi_restful_users/images/default-user-image.png' %}" alt="Card image cap">
+                        <div class="card-body">
+                          <h4 class="card-title">{{user.first_name}} {{user.last_name}}</h4>
+                          <p class="card-text">Email: {{ user.email }}</p>
+                          <p class="card-text">Create at: {{ user.created_at| date }}</p>
+                          <input formaction="/users/{{user.id}}/edit" class="btn btn-primary back" type="submit" value="Edit">
+                          <input formaction="/users/{{ user.id }}/delete" class="btn btn-primary back" type="submit" value="Delete">
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </body>
+</html>
