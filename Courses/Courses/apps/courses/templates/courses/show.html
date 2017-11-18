@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Delete A Course</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'courses/css/bootstrap-4.0.0-beta/dist/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'courses/css/bootstrap-4.0.0-beta/docs/4.0/examples/starter-template/starter-template.css'%}">
+        <link rel="stylesheet" href="{% static 'courses/css/style.css'%}">
+        <script type="text/javascript" src="{% static 'courses/js/jquery-3.2.1.js'%}"></script>
+        <script type="text/javascript" src="{% static 'courses/css/bootstrap-4.0.0-beta/assets/js/vendor/popper.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'courses/css/bootstrap-4.0.0-beta/dist/js/bootstrap.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'courses/js/script.js'%}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron profile">
+                <h3>Are you sure you want to delete the following course?</h3>
+
+                <div class="card" style="width: 40rem;">
+                    <div class="card-body">
+                      <p class="card-text">Name: {{ course.name }}</p>
+                      <p class="card-text">Description: {{ course.description }}</p>
+                      <form class="showBTN" action="/" method="get">
+                          {% csrf_token %}
+                          <input class="btn btn-dark back" type="submit" value="No">
+                      </form>
+                      <form class="showBTN" action="" method="post">
+                          {% csrf_token %}
+                          <input formaction="/courses/{{ course.id }}/destroy" class="btn btn-danger col-sm-12" type="submit" value="Yes! I want to delete this">
+                      </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </body>
+</html>

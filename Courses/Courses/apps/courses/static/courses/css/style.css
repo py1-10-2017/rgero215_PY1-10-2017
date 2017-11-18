@@ -1,0 +1,41 @@
+input, textarea {
+    margin-left: 20px;
+
+}
+label {
+    margin-left: 20px;
+}
+.delete {
+    display: inline;
+}
+/*h1 {
+    text-align: center;
+}*/
+.actions {
+    width: 300px;
+}
+/*.form-group {
+    display: block;
+}*/
+.profile {
+    text-align: center;
+}
+.card {
+    margin: 0 auto;
+}
+
+.button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+.name {
+    margin-left: 60px;
+}
+.add {
+    float: right;
+    margin-right: 150px;
+}
+.showBTN {
+    display: inline-block;
+}
