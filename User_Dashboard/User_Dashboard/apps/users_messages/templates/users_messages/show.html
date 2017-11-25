@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>User Information</title>
+        {% load static %}
+        <!-- CSS -->
+
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="{% static 'dashboard/bootstrap/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'dashboard/font-awesome/css/font-awesome.min.css'%}">
+        <link rel="stylesheet" href="{% static 'dashboard/css/form-elements.css'%}">
+        <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/style.css'%}">
+        <link rel="stylesheet" type="text/css" href="{% static 'dashboard/font-awesome/css/font-awesome.min.css'%}">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="{% static', filename='ico/favicon.png')}}">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'dashboard/ico/apple-touch-icon-144-precomposed.png'%}">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'dashboard/ico/apple-touch-icon-114-precomposed.png'%}">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'dashboard/ico/apple-touch-icon-72-precomposed.png'%}">
+        <link rel="apple-touch-icon-precomposed" href="{% static 'dashboard/ico/apple-touch-icon-57-precomposed.png'%}">
+    </head>
+    <body>
+        <div class="clearfix">
+            <nav class="navbar navbar-default">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="/logout">
+                    <img class="brand" alt="Brand" src="{% static 'dashboard/img/brand.png'%}" width="45px" height="45px">
+                  </a>
+                  <a class="navbar-brand dojo" href="/logout">Test App</a>
+                  <a class="navbar-brand dojo" href="/success">Dashboard</a>
+                  <a class="navbar-brand dojo" href="/users/{{ request.session.user_id }}/edit">Profile</a>
+                </div>
+                <ul class="nav nav-pills pull-right navbar-right">
+                    <li role="presentation"><a href="/logout" class="btn btn-info btn-lg active">Log off</a></li>
+                </ul>
+              </div>
+            </nav>
+        </div>
+        <div class="top-content">
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        {% if messages %}
+                          {% for message in messages %}
+                            <div class="alert alert-info alert-dismissible" role="alert">
+                            <button type="button" class="close fade" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ message }}
+                            </div>
+                          {% endfor %}
+                        {% endif %}
+                        <div class="col-sm-4">
+                            <h1 class="pull-left">User {{ user.id }}</h1>
+                            <div class="card" style="width: 30rem;">
+                                <img class="card-img-top" src="{% static 'dashboard/img/default-user-image.png' %}" alt="Card image cap">
+                                <div class="card-body">
+                                  <h1 class="card-title">{{user.first_name}} {{user.last_name}}</h1>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-1 middle-border"></div>
+                        <div class="col-sm-1"></div>
+
+                        <div class="col-sm-6">
+
+                        	<div class="form-box">
+                        		<div class="form-top">
+	                        		<div class="form-top-left">
+	                        			<h3>Description:</h3>
+	                            		<p>{{user.description}}</p>
+	                        		</div>
+	                        		<div class="form-top-right">
+	                        			<i class="fa fa-pencil"></i>
+	                        		</div>
+	                            </div>
+                            </div>
+                            <div class="pull-right user_info">
+                                <h3>Register: {{user.created_at|date}}</h3>
+                                <h3>Email: {{user.email}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 message clearfix">
+                            <form class="" action="/users/show/{{user.id}}/post" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+		                        	<h3 class="message">Leave a message for {{user.first_name}}</h3>
+		                        	<textarea name="message" class="form-about-yourself form-control" id="form-about-yourself"></textarea>
+		                        </div>
+		                        <button type="submit" class="btn pull-right">Post a message</button>
+                            </form>
+                        </div>
+                        {% for message in messages_obj %}
+                            <div class="col-sm-12 clearfix">
+                                <h4 class="message">{{message.created_by}} - {{message.created_at|date}}</h4>
+                                <div class="col-sm-11 pull-right">
+                                    <p class="message">{{message.message}}</p>
+                                    {% for comment in message.comments.all %}
+                                        {% if comments|length > 0 %}
+                                           <div class="col-sm-12 pull-right">
+                                               <h4 class="message">{{comment.created_by}} - {{comment.created_at|date}}</h4>
+                                               <p class="message">{{comment.comment}}</p>
+                                           </div>
+                                           {% endif %}
+                                    {% endfor %}
+                                    <div class="col-sm-12 pull-right">
+                                        <form class="" action='/users/show/{{user.id}}/comment' method="post">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <h4 class="message">Post a comment</h4>
+                                                <textarea name="comment" class="form-about-yourself form-control comment" id="form-about-yourself"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-success pull-right">Post a comment</button>
+                                            <input type="hidden" name="message_id" value="{{message.id}}">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+        	<div class="container">
+        		<div class="row">
+
+        			<div class="col-sm-8 col-sm-offset-2">
+        				<div class="footer-border"></div>
+        				<p>Made by Ramon Geronimo at <a href="http://linkedin.com/in/rgero215" target="_blank"><strong>RGERO215</strong></a></p>
+        			</div>
+
+        		</div>
+        	</div>
+        </footer>
+
+        <!-- Javascript -->
+        <script type="text/javascript" src="{% static 'dashboard/js/jquery-1.11.1.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'dashboard/bootstrap/js/bootstrap.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'dashboard/js/scripts.js'%}"></script>
+
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+    </body>
+</html>

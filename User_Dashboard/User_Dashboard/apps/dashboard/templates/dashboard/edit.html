@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Edit User</title>
+        {% load static %}
+        <!-- CSS -->
+
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="{% static 'dashboard/bootstrap/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'dashboard/font-awesome/css/font-awesome.min.css'%}">
+        <link rel="stylesheet" href="{% static 'dashboard/css/form-elements.css'%}">
+        <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/style.css'%}">
+        <link rel="stylesheet" type="text/css" href="{% static 'dashboard/font-awesome/css/font-awesome.min.css'%}">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="{% static', filename='ico/favicon.png')}}">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'dashboard/ico/apple-touch-icon-144-precomposed.png'%}">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'dashboard/ico/apple-touch-icon-114-precomposed.png'%}">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'dashboard/ico/apple-touch-icon-72-precomposed.png'%}">
+        <link rel="apple-touch-icon-precomposed" href="{% static 'dashboard/ico/apple-touch-icon-57-precomposed.png'%}">
+
+    </head>
+    <body>
+
+        <div class="clearfix">
+            <nav class="navbar navbar-default">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="/logout">
+                    <img class="brand" alt="Brand" src="{% static 'dashboard/img/brand.png'%}" width="45px" height="45px">
+                  </a>
+                  <a class="navbar-brand dojo" href="/logout">Test App</a>
+                  <a class="navbar-brand dojo" href="/success">Dashboard</a>
+                  <a class="navbar-brand dojo" href="/users/{{ request.session.user_id }}/edit">Profile</a>
+                </div>
+                <ul class="nav nav-pills pull-right navbar-right">
+                    <li role="presentation"><a href="/logout" class="btn btn-info btn-lg active">Log off</a></li>
+                </ul>
+              </div>
+            </nav>
+        </div>
+        <!-- Top content -->
+        <div class="top-content">
+            <div class="inner-bg">
+                <div class="container">
+
+                    <div class="row">
+                        {% if messages %}
+                          {% for message in messages %}
+                            <div class="alert alert-info alert-dismissible" role="alert">
+                            <button type="button" class="close fade" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ message }}
+                            </div>
+                          {% endfor %}
+                        {% endif %}
+                        <h1 class="pull-left">Edit User {{ user.id }}</h1>
+                        <ul class="nav nav-pills pull-right navbar-right">
+                            <li role="presentation"><a href="/success" class="btn btn-info btn-lg active">Return to Dashboard</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="row">
+                              {% if messages %}
+                                {% for message in messages %}
+                                  <div class="alert alert-info alert-dismissible" role="alert">
+                                  <button type="button" class="close fade" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  {{ message }}
+                                  </div>
+                                {% endfor %}
+                              {% endif %}
+                        <div class="col-sm-5">
+                            <div class="form-box">
+                                <div class="form-top">
+                                    <div class="form-top-left">
+                                        <h3>Edit Information</h3>
+                                    </div>
+                                    <div class="form-top-right">
+                                        <i class="fa fa-pencil"></i>
+                                    </div>
+                                </div>
+                                <div class="form-bottom">
+                                    <form action='/users/{{ user.id }}' method='POST' class="login-form">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label class="sr-only" for="first_name">First Name:</label>
+                                            <input class="form-control" type="text" name="first_name" id="first_name" value="{{user.first_name}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="sr-only" for="last_name">Last Name:</label>
+                                            <input class="form-control" type="text" name="last_name" id="last_name" value="{{user.last_name}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="sr-only" for="form-email">Email:</label>
+                                            <input type="text" name="email"  class="email form-control" id="form-email" value="{{user.email}}">
+                                        </div>
+                                        <label for="user_level">User Level:</label>
+                                        <select name="user_level" class="form-control form-control-lg user_level">
+                                          <option>Admin</option>
+                                          <option>Normal</option>
+                                        </select>
+                                        <button type="submit" class="btn">Save</button>
+                                    </form>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-sm-1 middle-border"></div>
+                        <div class="col-sm-1"></div>
+
+                        <div class="col-sm-5">
+
+                            <div class="form-box">
+                                <div class="form-top">
+                                    <div class="form-top-left">
+                                        <h3>Change Password</h3>
+                                    </div>
+                                    <div class="form-top-right">
+                                        <i class="fa fa-key"></i>
+                                    </div>
+                                </div>
+                                <div class="form-bottom">
+                                    <form role="form" action="/users/{{user.id}}/update_password" method="post" class="login-form">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label class="sr-only" for="form-password">Password</label>
+                                            <input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="sr-only" for="form-password">Password Confirmation</label>
+                                            <input type="password" name="confirm_password" placeholder="Password Confirmation..." class="form-password form-control" id="form-password">
+                                        </div>
+                                        <button type="submit" class="btn">Update Password</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- <div class="top-content">
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        {% if messages %}
+                          {% for message in messages %}
+                            <div class="alert alert-info alert-dismissible" role="alert">
+                            <button type="button" class="close fade" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ message }}
+                            </div>
+                          {% endfor %}
+                        {% endif %}
+                            <h1 class="pull-left">Edit User {{ user.id }}</h1>
+                            <ul class="nav nav-pills pull-right navbar-right">
+                                <li role="presentation"><a href="/dashboard/admin" class="btn btn-info btn-lg active">Return to Dashboard</a></li>
+                            </ul>
+                            <div class="col-sm-5">
+
+                            	<div class="form-box">
+    	                        	<div class="form-top">
+    	                        		<div class="form-top-left">
+    	                        			<h3>Edit Information</h3>
+    	                        		</div>
+    	                        		<div class="form-top-right">
+    	                        			<i class="fa fa-pencil"></i>
+    	                        		</div>
+    	                            </div>
+    	                            <div class="form-bottom">
+                                        <form action='/users/{{ user.id }}' method='POST' class="login-form">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="first_name">First Name:</label>
+                                                <input class="form-control" type="text" name="first_name" id="first_name" value="{{user.first_name}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="last_name">Last Name:</label>
+                                                <input class="form-control" type="text" name="last_name" id="last_name" value="{{user.last_name}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="form-email">Email:</label>
+    				                        	<input type="text" name="email"  class="email form-control" id="form-email" value="{{user.email}}">
+                                            </div>
+                                            <button type="submit" class="btn">Save</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-1 middle-border"></div>
+                            <div class="col-sm-1"></div>
+
+                            <div class="col-sm-5">
+
+                            	<div class="form-box">
+    	                        	<div class="form-top">
+    	                        		<div class="form-top-left">
+    	                        			<h3>Change Password</h3>
+    	                        		</div>
+    	                        		<div class="form-top-right">
+    	                        			<i class="fa fa-key"></i>
+    	                        		</div>
+    	                            </div>
+    	                            <div class="form-bottom">
+    				                    <form role="form" action="/login" method="post" class="login-form">
+                                            {% csrf_token %}
+    				                        <div class="form-group">
+    				                        	<label class="sr-only" for="form-password">Password</label>
+    				                        	<input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password">
+    				                        </div>
+                                            <div class="form-group">
+    				                        	<label class="sr-only" for="form-password">Password Confirmation</label>
+    				                        	<input type="password" name="confirm_password" placeholder="Password Confirmation..." class="form-password form-control" id="form-password">
+    				                        </div>
+    				                        <button type="submit" class="btn">Update Password</button>
+    				                    </form>
+    			                    </div>
+    		                    </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- Footer -->
+        <footer>
+        	<div class="container">
+        		<div class="row">
+
+        			<div class="col-sm-8 col-sm-offset-2">
+        				<div class="footer-border"></div>
+        				<p>Made by Ramon Geronimo at <a href="http://linkedin.com/in/rgero215" target="_blank"><strong>RGERO215</strong></a></p>
+        			</div>
+
+        		</div>
+        	</div>
+        </footer>
+
+        <!-- Javascript -->
+        <script type="text/javascript" src="{% static 'dashboard/js/jquery-1.11.1.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'dashboard/bootstrap/js/bootstrap.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'dashboard/js/scripts.js'%}"></script>
+
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+    </body>
+</html>
