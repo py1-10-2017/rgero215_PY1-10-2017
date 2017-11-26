@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Add Review</title>
+        {% load static %}
+        <!-- CSS -->
+
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="{% static 'books/bootstrap/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'books/font-awesome/css/font-awesome.min.css'%}">
+        <link rel="stylesheet" href="{% static 'books/kartik-v-bootstrap-star-rating-19120d9/css/star-rating.css'%}"  media="all">
+        <link rel="stylesheet" href="{% static 'books/css/form-elements.css'%}">
+        <link rel="stylesheet" type="text/css" href="{% static 'books/css/style.css'%}">
+        <link rel="stylesheet" type="text/css" href="{% static 'books/font-awesome/css/font-awesome.min.css'%}">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="{% static', filename='ico/favicon.png')}}">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'books/ico/apple-touch-icon-144-precomposed.png'%}">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'books/ico/apple-touch-icon-114-precomposed.png'%}">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'books/ico/apple-touch-icon-72-precomposed.png'%}">
+        <link rel="apple-touch-icon-precomposed" href="{% static 'books/ico/apple-touch-icon-57-precomposed.png'%}">
+
+    </head>
+    <body>
+
+        <div class="clearfix">
+            <nav class="navbar navbar-default">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="/logout">
+                    <img class="brand" alt="Brand" src="{% static 'books/img/brand.png'%}" width="45px" height="45px">
+                  </a>
+                </div>
+                <ul class="nav nav-pills pull-right navbar-right">
+                    <li role="presentation"><a class="navbar-brand dojo" href="/books">Home</a></li>
+                    <li role="presentation"><a href="/logout" class="btn btn-info btn-lg active">Logout</a></li>
+                </ul>
+              </div>
+            </nav>
+        </div>
+        <!-- Top content -->
+        <div class="top-content">
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        {% if messages %}
+                          {% for message in messages %}
+                            <div class="alert alert-info alert-dismissible" role="alert">
+                            <button type="button" class="close fade" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ message }}
+                            </div>
+                          {% endfor %}
+                        {% endif %}
+                        <!-- with all the data we can then construct a more structured output -->
+                        <div class="col-sm-5">
+                            <div class="row">
+                                <h1>{{book.title}}</h1>
+                                <h3>Author: {{book.author.name}}</h3>
+                            </div>
+                            <h1>Reviews:</h1><hr>
+                            {% for review in book.reviews.all %}
+                                <div class="row">
+                                    <input id="input-4" value="{{review.rating}}" name="input-4" class="rating rating-loading" data-show-clear="false" data-show-caption="true" data-size="sm">
+                                    <p><a href="/user/{{review.reviewer.id}}">{{review.reviewer.name}}</a> says: {{review.review}}</p>
+                                    <p>Posted on: {{review.created_at|date}}</p>
+                                    {% if review.reviewer.id == request.session.user_id %}
+                                        <a href="/books/{{review.id}}/delete" class="btn btn-danger btn-lg active pull-right">Delete this review</a>
+                                    {% endif %}
+                                </div><hr>
+                            {% endfor %}
+                        </div>
+
+                        <div class="col-sm-1 middle-border"></div>
+                        <div class="col-sm-1"></div>
+
+                        <div class="col-sm-5">
+                            <div class="row">
+                                <ul class="nav">
+                                    <li role="presentation"><h1>Add a Review:</h1></li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-12 message clearfix">
+                                <form class="" action="/books/{{book.id}}/create" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <textarea name="review" class="form-review form-control" id="form-review"></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="inline">
+                                            <h3 class="inline">Rating:</h3>
+                                        </div>
+                                        <div class="inline">
+                                            <select name="rating">
+                                              <option value="1">1</option>
+                                              <option value="2">2</option>
+                                              <option value="3">3</option>
+                                              <option value="4">4</option>
+                                              <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                        <div class="inline">
+                                            <h3 class="inline">stars.</h3>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn pull-right">Submit Review</button>
+                                </form>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer>
+        	<div class="container">
+        		<div class="row">
+
+        			<div class="col-sm-8 col-sm-offset-2">
+        				<div class="footer-border"></div>
+        				<p>Made by Ramon Geronimo at <a href="http://linkedin.com/in/rgero215" target="_blank"><strong>RGERO215</strong></a></p>
+        			</div>
+
+        		</div>
+        	</div>
+        </footer>
+
+        <!-- Javascript -->
+        <script type="text/javascript" src="{% static 'books/js/jquery-1.11.1.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'books/bootstrap/js/bootstrap.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'books/kartik-v-bootstrap-star-rating-19120d9/js/star-rating.js'%}"></script>
+        <script type="text/javascript" src="{% static 'books/js/scripts.js'%}"></script>
+
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+    </body>
+</html>
